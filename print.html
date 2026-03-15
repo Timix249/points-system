@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Print Cards</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:white;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+width:210mm;
+margin:auto;
+}
+
+.card{
+
+border:2px dashed #999;
+border-radius:12px;
+padding:20px;
+height:180px;
+text-align:center;
+position:relative;
+
+}
+
+.name{
+font-size:22px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.qr{
+margin:10px auto;
+width:100px;
+}
+
+.site{
+font-size:12px;
+margin-top:10px;
+color:#555;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="grid" id="grid"></div>
+
+<script>
+
+const urlParams = new URLSearchParams(window.location.search)
+const id = urlParams.get("id")
+
+let html=""
+
+for(let i=0;i<8;i++){
+
+html+=`
+
+<div class="card">
+
+<div class="name">${id}</div>
+
+<img class="qr"
+src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${id}">
+
+<div class="site">
+
+timix249.github.io/points-system
+
+</div>
+
+</div>
+
+`
+
+}
+
+document.getElementById("grid").innerHTML=html
+
+</script>
+
+</body>
+</html>
