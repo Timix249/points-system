@@ -103,6 +103,6 @@ document.getElementById("points").innerText="⭐ "+c.points
 
 function printCard(id){
 
-window.open("https://api.qrserver.com/v1/create-qr-code/?size=200x200&data="+id)
+window.open("print.html?id="+id)
 
 }
