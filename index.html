@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Points</title>
+<title>Scan Card</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -17,7 +18,7 @@
 
 <div class="box">
 
-<h1>Scan Card</h1>
+<h1>Scan your card</h1>
 
 <div id="reader"></div>
 
@@ -26,7 +27,7 @@
 
 </div>
 
-<script src="firebase.js"></script>
+<script type="module" src="firebase.js"></script>
 <script src="app.js"></script>
 
 <script>
@@ -37,10 +38,12 @@ loadCard(decodedText)
 
 }
 
-new Html5QrcodeScanner(
+const scanner = new Html5QrcodeScanner(
 "reader",
-{fps:10, qrbox:250}
-).render(onScanSuccess)
+{ fps: 10, qrbox: 250 }
+)
+
+scanner.render(onScanSuccess)
 
 </script>
 
