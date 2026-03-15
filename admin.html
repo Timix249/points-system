@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin</title>
 
@@ -16,11 +18,12 @@
 
 <h2>Admin Login</h2>
 
-<input id="password">
+<input id="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
 
 </div>
+
 
 <div id="dashboard" style="display:none">
 
@@ -29,6 +32,8 @@
 <input id="nameInput" placeholder="Customer Name">
 
 <button onclick="addCard()">Add</button>
+
+<br><br>
 
 <table id="table">
 
@@ -43,8 +48,13 @@
 
 </div>
 
-<script src="firebase.js"></script>
+
+<!-- FIREBASE MODULE -->
+<script type="module" src="firebase.js"></script>
+
+<!-- APP SCRIPT -->
 <script src="app.js"></script>
 
 </body>
+
 </html>
