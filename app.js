@@ -1,5 +1,3 @@
-const db = firebase.firestore()
-
 function login(){
 
 let p=document.getElementById("password").value
@@ -15,13 +13,13 @@ loadCards()
 
 }
 
-function addCard(){
+async function addCard(){
 
 let name=document.getElementById("nameInput").value
 
-let number=Math.floor(Math.random()*100000000)
+let number=Math.floor(Math.random()*100000000).toString()
 
-db.collection("cards").doc(number.toString()).set({
+await setDoc(doc(db,"cards",number),{
 
 name:name,
 points:0
@@ -32,7 +30,7 @@ points:0
 
 function loadCards(){
 
-db.collection("cards").onSnapshot(snapshot=>{
+onSnapshot(collection(db,"cards"),(snapshot)=>{
 
 let table=document.getElementById("table")
 
@@ -45,9 +43,9 @@ table.innerHTML=`
 </tr>
 `
 
-snapshot.forEach(doc=>{
+snapshot.forEach((docu)=>{
 
-let c=doc.data()
+let c=docu.data()
 
 table.innerHTML+=`
 
@@ -55,15 +53,15 @@ table.innerHTML+=`
 
 <td>${c.name}</td>
 
-<td>${doc.id}</td>
+<td>${docu.id}</td>
 
 <td>${c.points}</td>
 
 <td>
 
-<button onclick="addPoint('${doc.id}')">+1</button>
+<button onclick="addPoint('${docu.id}')">+1</button>
 
-<button onclick="printCard('${doc.id}')">Print</button>
+<button onclick="printCard('${docu.id}')">Print</button>
 
 </td>
 
@@ -77,26 +75,29 @@ table.innerHTML+=`
 
 }
 
-function addPoint(id){
+async function addPoint(id){
 
-db.collection("cards").doc(id).update({
+await updateDoc(doc(db,"cards",id),{
 
-points: firebase.firestore.FieldValue.increment(1)
+points: increment(1)
 
 })
 
 }
 
-function loadCard(id){
+async function loadCard(id){
 
-db.collection("cards").doc(id).get().then(doc=>{
+const ref=doc(db,"cards",id)
+const snap=await getDoc(ref)
 
-let c=doc.data()
+if(snap.exists()){
+
+let c=snap.data()
 
 document.getElementById("name").innerText=c.name
 document.getElementById("points").innerText="⭐ "+c.points
 
-})
+}
 
 }
 
