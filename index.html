@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Points</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Scan Card</h1>
+
+<div id="reader"></div>
+
+<h2 id="name"></h2>
+<h1 id="points"></h1>
+
+</div>
+
+<script src="firebase.js"></script>
+<script src="app.js"></script>
+
+<script>
+
+function onScanSuccess(decodedText){
+
+loadCard(decodedText)
+
+}
+
+new Html5QrcodeScanner(
+"reader",
+{fps:10, qrbox:250}
+).render(onScanSuccess)
+
+</script>
+
+</body>
+</html>
